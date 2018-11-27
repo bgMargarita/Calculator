@@ -15,10 +15,10 @@ public class Parser {
     public void reader() {
         BufferedReader readFromFile = null;
         try {
-            readFromFile = new BufferedReader(new FileReader("C:\\Users\\Batman\\Downloads\\text.txt"));
+            readFromFile = new BufferedReader(new FileReader("\\Users\\Batman\\IdeaProjects\\Calculator\\src\\file.txt"));
             while ((line = readFromFile.readLine()) != null) {
-            mass.add(readFromFile.readLine());
-
+            mass.add(line);
+                System.out.println("gdfg");
 
             }
         } catch (IOException e) {
@@ -32,6 +32,10 @@ public class Parser {
                 }
         }
 
+    }
+    public static void main(String args[]){
+        Parser parser = new Parser();
+        parser.reader();
     }
 
 }
