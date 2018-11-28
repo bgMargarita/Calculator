@@ -21,12 +21,12 @@ public class Parser {
 
     String line;
 
-    public List<String> StringToArray(String str) {
+    public List<String> stringToArray(String str) {
         return Arrays.asList(str.split(" "));
 
     }
 
-    public void WriteToStack(List<String> str) {
+    public void writeToStack(List<String> str) {
         Stack stack = new Stack();
         List<String> postfixString = new ArrayList<String>();
         for (int i = 0; i < str.size(); i++) {
@@ -48,7 +48,7 @@ public class Parser {
         }
     }
 
-    public List<String> ReadFromFile(String filename) {
+    public List<String> readFromFile(String filename) {
         List<String> stringsFromFile = new ArrayList<String>();
         BufferedReader readFromFile = null;
         try {
@@ -59,7 +59,7 @@ public class Parser {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return StringToArray(stringsFromFile.get(stringsFromFile.size() - 1));
+        return stringToArray(stringsFromFile.get(stringsFromFile.size() - 1));
     }
 
 
