@@ -9,6 +9,7 @@ import java.util.*;
  * Created by Batman on 27.11.2018.
  */
 public class Parser {
+
     private static final Map<String, Integer> OPERATION_PRIORITY = new HashMap<String, Integer>();
 
     static {
