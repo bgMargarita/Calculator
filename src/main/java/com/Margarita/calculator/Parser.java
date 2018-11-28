@@ -10,49 +10,17 @@ import java.util.*;
  */
 public class Parser {
 
-    private static final Map<String, Integer> OPERATION_PRIORITY = new HashMap<String, Integer>();
+    private String line;
 
-    static {
-        OPERATION_PRIORITY.put("*", 1);
-        OPERATION_PRIORITY.put("/", 1);
-        OPERATION_PRIORITY.put("+", 2);
-        OPERATION_PRIORITY.put("-", 2);
-    }
-
-    String line;
-
-    public List<String> stringToArray(String str) {
+    private List<String> stringToArray(String str) {
         return Arrays.asList(str.split(" "));
 
     }
 
-    public void writeToStack(List<String> str) {
-        Stack stack = new Stack();
-        List<String> postfixString = new ArrayList<String>();
-        for (int i = 0; i < str.size(); i++) {
-            if (str.get(i).matches("[-+]?\\d+"))
-                stack.push(str.get(i));
-            else if (str.get(i) == "(")
-                stack.push(str.get(i));
-            else if (str.get(i) == ")") {
-                stack.push(str.get(i));
-                while (stack.lastElement() != "(") {
-                    postfixString.add(stack.pop().toString());
-                }
-                stack.pop();
-            }
-           /* else{ while(!stack.isEmpty() && stack.lastElement())
-
-            } выбор приоритетной функции
-*/
-        }
-    }
-
     public List<String> readFromFile(String filename) {
         List<String> stringsFromFile = new ArrayList<String>();
-        BufferedReader readFromFile = null;
-        try {
-            readFromFile = new BufferedReader(new FileReader(filename));
+        try (BufferedReader readFromFile = new BufferedReader(new FileReader(filename))) {
+
             while ((line = readFromFile.readLine()) != null) {
                 stringsFromFile.add(line);
             }
