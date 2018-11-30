@@ -9,14 +9,27 @@ import static java.lang.Integer.parseInt;
  */
 public class Calculator {
 
-    private static final Map<String, Integer> OPERATION_PRIORITY = new HashMap<String, Integer>();
+    private int calculate(Integer operand1, Integer operand2, String operator) {
+        if (operator.equals("+")) {
+            return (operand1 + operand2);
+        }
+        if (operator.equals("-")) {
+            return (operand1 - operand2);
+        }
+        if (operator.equals("*")) {
+            return (operand1 * operand2);
+        }
+        if (operator.equals("/")) {
+            return (operand1 / operand2);
+        }
+    }
 
     private int getPriority(String operator) {
         if (operator.equals("+") || operator.equals("-"))
             return 2;
-        else if (operator.equals("*") || operator.equals("/"))
+        if (operator.equals("*") || operator.equals("/"))
             return 1;
-        else return 0;
+        return 0;
     }
 
     private boolean isOperator(String operator) {
@@ -29,14 +42,15 @@ public class Calculator {
         for (int i = 0; i < str.size(); i++) {
             if (str.get(i).matches("[-+]?\\d+"))
                 postfixString.add(str.get(i));
-            else if (str.get(i).equals("("))
+            if (str.get(i).equals("("))
                 stack.push(str.get(i));
-            else if (str.get(i).equals(")")) {
+            if (str.get(i).equals(")")) {
                 while (!str.get(i).equals("(")) {
                     postfixString.add(stack.pop() + " ");
                 }
                 stack.pop();
-            } else if (isOperator(str.get(i))) {
+            }
+            if (isOperator(str.get(i))) {
                 while (!stack.isEmpty() && getPriority(stack.peek()) >= getPriority(str.get(i))) {
                     postfixString.add(stack.pop() + " ");
                 }
@@ -46,7 +60,19 @@ public class Calculator {
         return postfixString;
     }
 
-    public int calculatePostfix(String postfix) {
+    public int calculatePostfix(List<String> postfix) {
+
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (String i : postfix) {
+            if (i.matches("[-+]?\\d+"))
+                stack.push(parseInt(i));
+
+            else {
+                int temp = stack.pop();
+                stack.push(calculate(temp, stack.pop(), i));
+            }
+        }
+        return stack.peek();
 
 
     }
