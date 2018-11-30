@@ -14,7 +14,6 @@ public class Parser {
 
     private List<String> stringToArray(String str) {
         return Arrays.asList(str.split(" "));
-
     }
 
     public List<String> readFromFile(String filename) {
@@ -29,6 +28,4 @@ public class Parser {
         }
         return stringToArray(stringsFromFile.get(stringsFromFile.size() - 1));
     }
-
-
 }
