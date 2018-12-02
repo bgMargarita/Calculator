@@ -10,22 +10,28 @@ import java.util.*;
  */
 public class Parser {
 
-    private String line;
 
     private List<String> stringToArray(String str) {
         return Arrays.asList(str.split(" "));
     }
 
-    public List<String> readFromFile(String filename) {
-        List<String> stringsFromFile = new ArrayList<String>();
-        try (BufferedReader readFromFile = new BufferedReader(new FileReader(filename))) {
 
+
+    public List<List<String>> readFromFile(String filename) {
+
+        List<List<String>> stringsFromFile = new ArrayList<>();
+        //ArrayList<String> stringsFromFile = new ArrayList<String>();
+        try (BufferedReader readFromFile = new BufferedReader(new FileReader(filename))) {
+            String line;
             while ((line = readFromFile.readLine()) != null) {
-                stringsFromFile.add(line);
+                //stringsFromFile.add(line);
+               // listOfStringFromFile.add((ArrayList<String>) stringToArray(stringsFromFile.get(stringsFromFile.size() - 1)));
+                stringsFromFile.add(stringToArray(line));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return stringToArray(stringsFromFile.get(stringsFromFile.size() - 1));
+        return stringsFromFile;
+       // return stringToArray(stringsFromFile.get(stringsFromFile.size() - 1));
     }
 }
