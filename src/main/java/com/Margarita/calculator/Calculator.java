@@ -48,9 +48,12 @@ public class Calculator {
                 while (!(stack.peek().equals("("))) {
                     postfixString.add(stack.pop());
                 }
+                stack.pop();
             }
             if (isOperator(str.get(i))) {
+//                boolean b = getPriority(stack.peek()) >= getPriority(str.get(i));
                 while (!stack.isEmpty() && (getPriority(stack.peek()) >= getPriority(str.get(i)))) {
+               // while (!stack.isEmpty()) {
                     postfixString.add(stack.pop());
                 }
                 stack.push(str.get(i));
