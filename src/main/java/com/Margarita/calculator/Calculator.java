@@ -22,11 +22,13 @@ public class Calculator {
         return (operators.get(operator).evaluate(operand1, operand2));
     }
 
-    private int getPriority(String operator) {
-        if (operator.equals("+") || operator.equals("-"))
-            return 2;
-        if (operator.equals("*") || operator.equals("/"))
+    public int getPriority(String operator) {
+        if (operator.equals("+") || operator.equals("-")) {
             return 1;
+        }
+        if (operator.equals("*") || operator.equals("/")) {
+            return 2;
+        }
         return 0;
     }
 
@@ -51,9 +53,7 @@ public class Calculator {
                 stack.pop();
             }
             if (isOperator(str.get(i))) {
-//                boolean b = getPriority(stack.peek()) >= getPriority(str.get(i));
                 while (!stack.isEmpty() && (getPriority(stack.peek()) >= getPriority(str.get(i)))) {
-               // while (!stack.isEmpty()) {
                     postfixString.add(stack.pop());
                 }
                 stack.push(str.get(i));
@@ -95,8 +95,9 @@ public class Calculator {
         str.add("+");
         str.add("3");
         calcul.calculatePostfix(calcul.writeToStack(str));
-        //System.out.println(n);
-
-
+        String operator = "+";
+        System.out.println(calcul.getPriority(operator));
     }
+
+
 }
