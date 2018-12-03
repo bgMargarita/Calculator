@@ -23,17 +23,11 @@ public class Calculator {
     }
 
     public int getPriority(String operator) {
-        if (operator.equals("+")) {
+        if (operator.equals("+") || operator.equals("-")) {
             return 1;
         }
-        if (operator.equals("*")) {
-            return 3;
-        }
-        if (operator.equals("-")) {
+        if (operator.equals("*") || operator.equals("/")) {
             return 2;
-        }
-        if (operator.equals("/")) {
-            return 4;
         }
         return 0;
     }
