@@ -2,6 +2,7 @@ package com.Margarita.calculator;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Created by Batman on 03.12.2018.
@@ -15,12 +16,5 @@ public class Writer {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    public static void main(String args[]) {
-        Calculator c = new Calculator();
-        Parser p = new Parser();
-        Writer w = new Writer();
-        w.writeToFile(c.calculatePostfix(c.writeToStack(p.readFromFile("file.txt").get(0))));
     }
 }

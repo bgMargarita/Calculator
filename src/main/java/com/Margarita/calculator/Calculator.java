@@ -68,7 +68,6 @@ public class Calculator {
         while (!(stack.isEmpty())) {
             postfixString.add(stack.pop());
         }
-        System.out.println(postfixString);
         return postfixString;
     }
 
@@ -84,7 +83,6 @@ public class Calculator {
                 stack.push(calculate(stack.pop(), temp, i));
             }
         }
-        System.out.println(stack.peek());
         return stack.peek();
     }
 }
