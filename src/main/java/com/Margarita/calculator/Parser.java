@@ -11,7 +11,7 @@ import java.util.*;
 public class Parser {
 
     private List<String> stringToArray(String str) {
-        return Arrays.asList(str.split(" "));
+        return Arrays.asList(str.split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)"));
     }
 
     public List<List<String>> readFromFile(String filename) {
@@ -27,4 +27,5 @@ public class Parser {
         }
         return stringsFromFile;
     }
+
 }

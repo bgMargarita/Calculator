@@ -16,6 +16,8 @@ public class Calculator {
         operators.put("-", new MinusOperator());
         operators.put("/", new DivisionOperator());
         operators.put("*", new MultiplyOperator());
+        operators.put("^", new PowerOperator());
+        operators.put("power", new PowerOperator());
     }
 
     private Double calculate(Double operand1, Double operand2, String operator) {
@@ -28,6 +30,9 @@ public class Calculator {
         }
         if (operator.equals("*") || operator.equals("/")) {
             return 2;
+        }
+        if (operator.equals("^")) {
+            return 3;
         }
         return 0;
     }
