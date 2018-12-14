@@ -28,4 +28,8 @@ public class Parser {
         return stringsFromFile;
     }
 
+    public static void main(String Args[]) {
+        String str = "12+2)+3*(1+9)";
+        System.out.println(Arrays.asList(str.split("([+\\-*/\\d\\(\\)=])")));
+    }
 }

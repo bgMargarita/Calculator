@@ -12,18 +12,37 @@ public class Calculator {
     private static Map<String, Operator> operators = new HashMap<>();
 
     static {
-        operators.put("+", new PlusOperator());
-        operators.put("-", new MinusOperator());
-        operators.put("/", new DivisionOperator());
-        operators.put("*", new MultiplyOperator());
-        operators.put("^", new PowerOperator());
-        operators.put("power", new PowerOperator());
+        operators.put("+", (double a, double b) -> {
+            return a + b;
+        });
+        operators.put("-", (double a, double b) -> {
+            return a - b;
+        });
+        operators.put("/", (double a, double b) -> {
+            return a / b;
+        });
+        operators.put("*", (double a, double b) -> {
+            return a * b;
+        });
+        operators.put("^", (double a, double b) -> {
+            return Math.pow(a, b);
+        });
     }
 
-    private Double calculate(Double operand1, Double operand2, String operator) {
-        return (operators.get(operator).evaluate(operand1, operand2));
-    }
+    public Double calculatePostfix(List<String> postfix) {
 
+        Deque<Double> stack = new ArrayDeque<>();
+        for (String i : postfix) {
+            if (i.matches("[-+]?\\d+"))
+                stack.push(Double.parseDouble(i));
+
+            else {
+                Double temp = stack.pop();
+                stack.push(calculate(stack.pop(), temp, i));
+            }
+        }
+        return stack.peek();
+    }
     public int getPriority(String operator) {
         if (operator.equals("+") || operator.equals("-")) {
             return 1;
@@ -37,11 +56,18 @@ public class Calculator {
         return 0;
     }
 
-    private boolean isOperator(String operator) {
-        return (operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/"));
+    public double calculate(List<String> str) {
+        return calculatePostfix(transformToPostfix(str));
     }
 
-    public List<String> writeToStack(List<String> str) {
+    private Double calculate(Double operand1, Double operand2, String operator) {
+        return operators.get(operator).evaluate(operand1, operand2);
+    }
+    private boolean isOperator(String operator) {
+        return operators.containsKey(operator);
+    }
+
+    private List<String> transformToPostfix(List<String> str) {
         Deque<String> stack = new ArrayDeque<>();
         List<String> postfixString = new ArrayList<>();
         for (int i = 0; i < str.size(); i++) {
@@ -67,21 +93,9 @@ public class Calculator {
         while (!(stack.isEmpty())) {
             postfixString.add(stack.pop());
         }
+
         return postfixString;
     }
 
-    public Double calculatePostfix(List<String> postfix) {
 
-        Deque<Double> stack = new ArrayDeque<>();
-        for (String i : postfix) {
-            if (i.matches("[-+]?\\d+"))
-                stack.push(Double.parseDouble(i));
-
-            else {
-                Double temp = stack.pop();
-                stack.push(calculate(stack.pop(), temp, i));
-            }
-        }
-        return stack.peek();
-    }
 }

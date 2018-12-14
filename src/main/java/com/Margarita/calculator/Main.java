@@ -9,6 +9,7 @@ public class Main {
         Calculator c = new Calculator();
         Parser p = new Parser();
         Writer w = new Writer();
-        w.writeToFile(c.calculatePostfix(c.writeToStack(p.readFromFile("file.txt").get(0))));
+
+        // w.writeToFile(c.calculatePostfix(c.writeToStack(p.readFromFile("file.txt").get(0))));
     }
 }
